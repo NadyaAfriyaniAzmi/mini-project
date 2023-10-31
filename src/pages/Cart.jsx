@@ -189,7 +189,7 @@ function Cart() {
           </table>
         </div>
       </div>
-      <div className="flex justify-between bottom-0 gap-6 left-0 w-full h-16  border-t border-gray-200 bg-gray-50">
+      <div className="fixed flex justify-between bottom-0 gap-6 left-0 w-full h-16  border-t border-gray-200 bg-gray-50">
       <div className="flex">
           <button
             onClick={() => {
