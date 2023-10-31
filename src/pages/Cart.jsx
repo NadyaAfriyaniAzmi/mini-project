@@ -1,10 +1,8 @@
 import { React, useState, useEffect } from "react";
-import iconMinus from "../assets/iconMinus.svg";
-import iconPlus from "../assets/iconPlus.svg";
-import { useDispatch } from "react-redux";
-import { removeItem } from "../components/cartSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, removeSelectedItems } from "../components/cartSlice";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Cart() {
   const navigate = useNavigate();
@@ -43,13 +41,28 @@ function Cart() {
     }
   };
   const handleCheckout = () => {
-    const selectedItemsData = items.filter((item, index) =>
-      selectedItems.includes(index)
-    );
-
-    console.log("Selected Items:", selectedItemsData);
-
+    if (selectedItems.length === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "No items selected",
+        text: "Please select items to checkout.",
+      });
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "Checkout successfully",
+        showConfirmButton: true,
+      }).then((res) => {
+        if (res.isConfirmed) {
+          dispatch(removeSelectedItems(selectedItems));
+          setSelectedItems([]);
+        }
+      });
+    }
   };
+  
+  
+  
 
   const handleCheckboxChange = (index) => {
     if (selectedItems.includes(index)) {
@@ -60,6 +73,7 @@ function Cart() {
       setSelectedItems((prevSelectedItems) => [...prevSelectedItems, index]);
     }
   };
+  
 
   useEffect(() => {
     let totalPrice = 0;
