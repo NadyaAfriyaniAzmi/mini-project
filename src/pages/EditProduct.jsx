@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 function EditProduct() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const [editProduct, setEditProduct] = useState({
     name: "",
@@ -96,6 +97,12 @@ function EditProduct() {
 
     fetchProductData();
   }, [id]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">

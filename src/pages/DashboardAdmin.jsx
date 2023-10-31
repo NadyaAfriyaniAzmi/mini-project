@@ -10,11 +10,16 @@ import ImgTopi from "../assets/imgTopi.png";
 import ImgSepatu from "../assets/imgSepatu.png";
 import ImgRoller from "../assets/imgroller.png";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 function DashboardAdmin() {
+  const navigate = useNavigate()
   const [product, setProduct] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all product");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  
 
   const getProduct = async () => {
     try {
@@ -42,6 +47,12 @@ function DashboardAdmin() {
   useEffect(() => {
     getProduct();
   }, [categoryFilter]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
   
   return (
     <>
@@ -59,7 +70,14 @@ function DashboardAdmin() {
         <h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">
         Kategori
       </h3>
-        <div className="grid w-full gap-6 px-10 md:grid-cols-5">
+        <div className="grid w-full gap-6 px-10 md:grid-cols-6">
+          <Category
+            label={"All Product"}
+            image={ImgRoller}
+            onClick={() => {
+              setCategoryFilter("all product");
+            }}
+          />
           <Category
             label={"sepatu"}
             image={ImgSepatu}
@@ -93,13 +111,6 @@ function DashboardAdmin() {
             image={ImgPakaian}
             onClick={() => {
               setCategoryFilter("Pakaian");
-            }}
-          />
-          <Category
-            label={"All Product"}
-            image={ImgRoller}
-            onClick={() => {
-              setCategoryFilter("all product");
             }}
           />
         </div>

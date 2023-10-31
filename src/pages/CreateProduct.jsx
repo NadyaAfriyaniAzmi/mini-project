@@ -16,6 +16,7 @@ function CreateProduct() {
   const [errors, setErrors] = useState({});
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const handleProductNameChange = (e) => {
     const value = e.target.value;
@@ -113,6 +114,11 @@ function CreateProduct() {
 
     handleAddProduct(productData);
   };
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <>
@@ -215,13 +221,13 @@ function CreateProduct() {
           <div className="flex gap-x-8">
             <button
               type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 hover:bg-white hover:text-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 hover:bg-white hover:text-blue-700 dark:focus:ring-blue-800"
             >
               Submit
             </button>
             <button
               type="submit"
-              className="text-blue-700 bg-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 hover:bg-blue-700 hover:text-white dark:focus:ring-blue-800"
+              className="text-blue-700 bg-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 hover:bg-blue-700 hover:text-white dark:focus:ring-blue-800"
               onClick={() => navigate("/productListing")}
             >
               Cancel
