@@ -28,7 +28,7 @@ function DetailProduct() {
           </h2>
           <div className="flex">
             <div className="flex justify-center flex-col md:flex-row w-full h-screen ">
-              <div className="flex flex-col w-[1500px] h-[500px] bg-white border border-gray-200 dark:border-gray-700 dark:bg-gray-800 rounded-lg shadow dark:bg-gray-800">
+              <div className="flex flex-col w-[1500px] h-[500px] bg-white border border-gray-200  rounded-lg shadow">
                 <div className="md:flex w-full h-screen gap-10 p-4">
                   <img
                     src={product.image}
