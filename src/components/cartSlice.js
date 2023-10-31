@@ -11,10 +11,12 @@ export const cartSlice = createSlice({
     addItem(state, action) {
       state.items.push(action.payload);
     },
-    removeItem(state, action) {
-      state.items = state.items.filter((item) => {
-        item.id !== action.payload;
-      });
+    removeItem: (state, action) => {
+      const itemIndex = state.items.findIndex((item) => item.id === action.payload);
+
+      if (itemIndex !== -1) {
+        state.items.splice(itemIndex, 1);
+      }
     },
     removeSelectedItems: (state, action) => {
       state.items = state.items.filter((item, index) => !action.payload.includes(index));

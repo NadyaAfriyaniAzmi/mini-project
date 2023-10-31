@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem, removeSelectedItems } from "../components/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Cart() {
@@ -13,7 +13,9 @@ function Cart() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+
   const handleRemoveItem = (itemId) => {
+    // Dispatch the removeItem action with the item ID
     dispatch(removeItem(itemId));
   };
 
@@ -167,13 +169,12 @@ function Cart() {
                     {item?.price}
                   </td>
                   <td className="px-6 py-4">
-                    <a
-                      href="/cart"
+                    <Link to="/cart"
                       className="font-medium text-red-600 hover:underline"
                       onClick={() => handleRemoveItem(item.id)}
                     >
                       Remove
-                    </a>
+                    </Link>
                   </td>
                   <td className="px-6 py-4">
                     <input
