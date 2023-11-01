@@ -15,7 +15,6 @@ function Cart() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   const handleRemoveItem = (itemId) => {
-    // Dispatch the removeItem action with the item ID
     dispatch(removeItem(itemId));
   };
 

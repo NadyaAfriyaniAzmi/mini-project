@@ -59,7 +59,7 @@ function DashboardAdmin() {
       <Sidebar />
       <div className="p-4 sm:ml-64">
         <h2 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white py-10">
-          Product Detail
+          Dashboard Admin
         </h2>
         <div className="flex justify-end">
           <Search
